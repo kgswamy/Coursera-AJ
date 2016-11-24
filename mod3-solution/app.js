@@ -24,6 +24,7 @@ menu.getMatchedItems = function(){
 
   if (menu.itemFilter == ""){
     menu.notFound ="Nothing Found!";
+    menu.foundItems="";
     return;
   }
 
@@ -38,13 +39,16 @@ menu.getMatchedItems = function(){
             if(menu.foundItems[i].description.toUpperCase().indexOf(menu.itemFilter.toUpperCase()) == -1){
               // console.log(i, menu.foundItems[i].description, menu.itemFilter);
               menu.foundItems.splice(i,1);
+              menu.checkcount();
+
             }
         }
         console.log(menu.foundItems.length);
-        if (menu.foundItems.length == 0 ){
-          menu.notFound ="Nothing Found!";
-          return;
-        } else menu.notFound ="";
+        menu.checkcount();
+        // if (menu.foundItems.length == 0 ){
+        //   menu.notFound ="Nothing Found!";
+        //   return;
+        // } else menu.notFound ="";
 
 
   })
@@ -57,7 +61,17 @@ menu.getMatchedItems = function(){
 menu.removeItem = function (itemIndex) {
   // this.lastRemoved = "Last item removed was " + this.items[itemIndex].name;
     menu.foundItems.splice(itemIndex, 1);
+    menu.checkcount();
     console.log(menu.foundItems.length);
+
+  };
+
+menu.checkcount = function () {
+  // this.lastRemoved = "Last item removed was " + this.items[itemIndex].name;
+  if (menu.foundItems.length == 0 ){
+    menu.notFound ="Nothing Found!";
+    return;
+  } else menu.notFound ="";
 
   };
 
